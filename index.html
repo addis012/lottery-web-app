@@ -6,7 +6,7 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #2c3e50;
+            background-color: #1c1c1c;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         #container {
@@ -20,11 +20,11 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
             padding: 15px;
             border-radius: 10px;
-            color: #fff;
-            font-size: 14px;
         }
         .statistics h3 {
             text-align: center;
@@ -36,49 +36,52 @@
             justify-content: space-between;
             padding: 5px 0;
         }
+        .wheel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
     <div id="container"></div>
     <div class="statistics">
-        <h3>Game Stats</h3>
-        <div class="stat"><span>Color</span> <span>6</span></div>
-        <div class="stat"><span>Dozens</span> <span>3</span></div>
-        <div class="stat"><span>Odd/Even</span> <span>4/4</span></div>
-        <div class="stat"><span>High/Low</span> <span>5/3</span></div>
-        <div class="stat"><span>Split</span> <span>12</span></div>
-        <div class="stat"><span>3 Line</span> <span>9</span></div>
-        <div class="stat"><span>Corner</span> <span>8</span></div>
-        <div class="stat"><span>Column</span> <span>3</span></div>
+        <h3>Game Statistics</h3>
+        <div class="stat"><span>Number</span> <span>18</span></div>
+        <div class="stat"><span>Color</span> <span>Red</span></div>
+        <div class="stat"><span>Odd/Even</span> <span>Even</span></div>
+        <div class="stat"><span>High/Low</span> <span>Low</span></div>
+        <!-- Add more statistics as needed -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Set up the scene, camera, and renderer
+        // Create the scene, camera, and renderer
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('container').appendChild(renderer.domElement);
 
-        // Create the 3D wheel
-        const geometry = new THREE.CylinderGeometry(5, 5, 1, 32);
-        const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: false });
-        const wheel = new THREE.Mesh(geometry, material);
-        wheel.rotation.x = Math.PI / 2; // Rotate the wheel to make it flat
+        // Add a 3D wheel (cylinder)
+        const wheelGeometry = new THREE.CylinderGeometry(5, 5, 1, 32);
+        const wheelMaterial = new THREE.MeshBasicMaterial({ color: 0xff4500 });
+        const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+        wheel.rotation.x = Math.PI / 2;
         scene.add(wheel);
 
         // Lighting
-        const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+        const ambientLight = new THREE.AmbientLight(0x404040);
         scene.add(ambientLight);
         const pointLight = new THREE.PointLight(0xffffff, 1, 100);
         pointLight.position.set(10, 10, 10);
         scene.add(pointLight);
 
-        // Position the camera
+        // Camera positioning
         camera.position.z = 10;
 
-        // Animation function
+        // Animation loop
         function animate() {
             requestAnimationFrame(animate);
             wheel.rotation.z += 0.01; // Rotate the wheel
@@ -86,7 +89,7 @@
         }
         animate();
 
-        // Resize the renderer on window resize
+        // Handle window resize
         window.addEventListener('resize', () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
             camera.aspect = window.innerWidth / window.innerHeight;
