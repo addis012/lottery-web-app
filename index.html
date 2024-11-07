@@ -16,11 +16,16 @@
         .container {
             display: flex;
             align-items: flex-start;
+            background-color: #3b3b3b;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         .spinner {
             width: 350px;
             height: 350px;
             border-radius: 50%;
+            border: 10px solid #222;
             background: conic-gradient(
                 #e74c3c 0deg, #e74c3c 36deg, 
                 #f39c12 36deg, #f39c12 72deg,
@@ -33,9 +38,7 @@
                 #c0392b 288deg, #c0392b 324deg,
                 #8e44ad 324deg, #8e44ad 360deg
             );
-            border: 10px solid #34495e;
             position: relative;
-            animation: spin 5s ease-out infinite;
         }
         .pointer {
             width: 0;
@@ -48,56 +51,50 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        .bought-numbers {
+        .statistics {
             margin-left: 20px;
+            background: #2e2e2e;
             padding: 15px;
-            background: #34495e;
             border-radius: 10px;
+            width: 250px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            width: 220px;
         }
-        .bought-numbers h3 {
+        .statistics h3 {
             text-align: center;
-            margin-bottom: 15px;
             color: #ecf0f1;
-            border-bottom: 1px solid #7f8c8d;
-            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #555;
+        }
+        .stat:last-child {
+            border-bottom: none;
         }
         .number {
-            font-size: 18px;
             font-weight: bold;
-            padding: 8px;
-            text-align: center;
-            background-color: #2ecc71;
-            color: #fff;
-            border-radius: 5px;
-            margin: 5px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            color: #f39c12;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="spinner" id="spinner">
+        <div class="spinner">
             <div class="pointer"></div>
         </div>
-        <div class="bought-numbers">
-            <h3>Bought Numbers</h3>
-            <div id="numbers"></div>
+        <div class="statistics">
+            <h3>Game Stats</h3>
+            <div class="stat"><span>Color</span> <span class="number">6</span></div>
+            <div class="stat"><span>Dozens</span> <span class="number">3</span></div>
+            <div class="stat"><span>Odd/Even</span> <span class="number">4/4</span></div>
+            <div class="stat"><span>High/Low</span> <span class="number">5/3</span></div>
+            <div class="stat"><span>Split</span> <span class="number">12</span></div>
+            <div class="stat"><span>3 Line</span> <span class="number">9</span></div>
+            <div class="stat"><span>Corner</span> <span class="number">8</span></div>
+            <div class="stat"><span>Column</span> <span class="number">3</span></div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const numbers = document.getElementById("numbers");
-
-            // Example: Random bought numbers
-            const boughtNumbers = [5, 12, 18, 25, 33, 40];
-            numbers.innerHTML = boughtNumbers.map(num => `<div class="number">${num}</div>`).join("");
-        });
-    </script>
 </body>
 </html>
