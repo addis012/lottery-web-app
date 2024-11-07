@@ -9,32 +9,70 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
         }
         .container {
             display: flex;
             align-items: flex-start;
         }
         .spinner {
-            width: 400px;
-            height: 400px;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
-            border: 5px solid #333;
+            background: conic-gradient(
+                #e74c3c 0deg, #e74c3c 36deg, 
+                #f39c12 36deg, #f39c12 72deg,
+                #2ecc71 72deg, #2ecc71 108deg,
+                #3498db 108deg, #3498db 144deg,
+                #9b59b6 144deg, #9b59b6 180deg,
+                #e67e22 180deg, #e67e22 216deg,
+                #1abc9c 216deg, #1abc9c 252deg,
+                #34495e 252deg, #34495e 288deg,
+                #c0392b 288deg, #c0392b 324deg,
+                #8e44ad 324deg, #8e44ad 360deg
+            );
+            border: 10px solid #34495e;
             position: relative;
-            overflow: hidden;
+            animation: spin 5s ease-out infinite;
+        }
+        .pointer {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 30px solid #ecf0f1;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .bought-numbers {
             margin-left: 20px;
-            padding: 10px;
-            background: #fff;
-            border: 1px solid #ddd;
-            width: 200px;
+            padding: 15px;
+            background: #34495e;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 220px;
+        }
+        .bought-numbers h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+            border-bottom: 1px solid #7f8c8d;
+            padding-bottom: 5px;
         }
         .number {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
-            padding: 5px;
+            padding: 8px;
+            text-align: center;
+            background-color: #2ecc71;
+            color: #fff;
+            border-radius: 5px;
+            margin: 5px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         @keyframes spin {
             from { transform: rotate(0deg); }
@@ -44,24 +82,21 @@
 </head>
 <body>
     <div class="container">
-        <div class="spinner" id="spinner"></div>
+        <div class="spinner" id="spinner">
+            <div class="pointer"></div>
+        </div>
         <div class="bought-numbers">
             <h3>Bought Numbers</h3>
             <div id="numbers"></div>
         </div>
     </div>
     <script>
-        // JavaScript to create the spinning effect and display numbers
         document.addEventListener("DOMContentLoaded", () => {
-            const spinner = document.getElementById("spinner");
             const numbers = document.getElementById("numbers");
 
             // Example: Random bought numbers
             const boughtNumbers = [5, 12, 18, 25, 33, 40];
             numbers.innerHTML = boughtNumbers.map(num => `<div class="number">${num}</div>`).join("");
-
-            // Spin logic (simplified)
-            spinner.style.animation = "spin 5s ease-out infinite";
         });
     </script>
 </body>
